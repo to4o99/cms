@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\MustBeAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('admin')->middleware([MustBeAdmin::class])->group(function (){
+    return 'You are admin';
+});
+
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.layout');
 });
